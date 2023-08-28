@@ -1,12 +1,22 @@
-export type InputTypes = {
+export interface InputTypes {
   label: string;
   type: React.HTMLInputTypeAttribute;
-};
+  valor: string;
+  setValor: Function ;
+}
 
-export type ButtonTypes = {
+export interface ButtonTypes {
   name: string;
-};
+}
 
-export type TextAreaTypes = {
-  
+export interface TextAreaTypes {
+  name: string;
+  valor: string;
+  setValor: Function;
+}
+
+export interface InputFilesTypes {
+  label: string;
+  setValor: Function | null;
+  tipoArquivo?: string | null;
 }
