@@ -1,40 +1,52 @@
 import axios from 'axios';
 import React from 'react'
 import Input from '../components/globalComponents/Input';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const index = () => {
-  const [cep, setCep] = React.useState<string>('')
+  //buscador
+  const [buscador, setBuscador] = React.useState<string>('')
 
+  const router = useRouter()
 
   React.useEffect(() => {
-    if (cep.length === 8) {
-      axios.get(`http://viacep.com.br/ws/${cep}/json`)
+    if (router.query.cep !== undefined) {
+      console.log(typeof +router.query.cep)
+      axios.get(`http://viacep.com.br/ws/${router.query.cep}/json`)
         .then(response => {
           const endereco = response.data;
           console.log(endereco)
-          if (!endereco.erro) {
-            console.log('CEP encontrado:', endereco.cep);
-          } else {
-            console.log('Rua não encontrada.');
-          }
+        
+        })
+        .catch(error => {
+          console.error('Erro ao consultar o CEP:', error);
+        });
+      router.query.cep = undefined
+    }
+    else if (buscador.length === 8) {
+      axios.get(`http://viacep.com.br/ws/${buscador}/json`)
+        .then(response => {
+          const endereco = response.data;
+          console.log(endereco)
         })
         .catch(error => {
           console.error('Erro ao consultar o CEP:', error);
         });
     }
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        console.log("Latitude:", latitude, "Longitude:", longitude);
-      });
-    }
-
-  }, [cep])
+  }, [buscador])
 
 
   return (
-    <Input typeFormat='number' label='CEP' type='text' valor={cep} setValor={setCep} />
+    <>
+
+      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='number' />
+      <button><Link href={{
+        pathname: '/endereco',
+        query: { cep: `${buscador}` }
+      }}>Buscar</Link></button>
+
+    </>
   )
 }
 
