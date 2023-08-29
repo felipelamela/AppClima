@@ -40,9 +40,9 @@ const Forms = () => {
     <>
       <form onSubmit={e => handleSubmit(e)}>
 
-        <Input label='Nome' type='text' valor={nome} setValor={setNome} />
-        <Input label='Email' type='text' valor={email} setValor={setEmail} />
-        <Input label='Contato' type='tel' valor={contato} setValor={setContato} />
+        <Input label='Nome' type='text' valor={nome} setValor={setNome} typeFormat='string'/>
+        <Input label='Email' type='text' valor={email} setValor={setEmail} typeFormat='string'/>
+        <Input label='Contato' type='tel' valor={contato} setValor={setContato} typeFormat='number'/>
         <TextArea name='Mensagem' valor={mensagem} setValor={setMensagem} />
         <InputFile label='Arquivo' tipoArquivo='.pdf' setValor={setArquivo} />
         <Button name='Enviar' />

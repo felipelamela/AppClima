@@ -2,7 +2,8 @@ export interface InputTypes {
   label: string;
   type: React.HTMLInputTypeAttribute;
   valor: string;
-  setValor: Function ;
+  setValor: Function;
+  typeFormat: string;
 }
 
 export interface ButtonTypes {
