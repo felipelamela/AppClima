@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Input from './components/globalComponents/Input'
 import Link from 'next/link'
+import formatBuscador from './components/utilits/formatBuscador'
 
 
 const index = () => {
@@ -33,7 +34,8 @@ const index = () => {
   }, [])
 
   //fetch usuario local
-  React.useEffect(() => {
+  /*
+    React.useEffect(() => {
     if (latUser !== null) {
       axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latUser}&lon=${lngUser}&units=metric&appid=831abf463c39305a62a4a3ec257719a7`)
         .then(response => {
@@ -53,13 +55,13 @@ const index = () => {
   }, [latUser])
 
   if (tempNow === null) return <p> Carregando </p>
-
+ */
   return (
     <>
-      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='number' />
+      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='string' />
       <button><Link href={{
         pathname: '/endereco',
-        query: { cep: `${buscador}` }
+        query: { endereco: `${formatBuscador(buscador)}` }
       }}>Buscar</Link></button>
       <h2>{pais}</h2>
       <h3>{cidade}</h3>
@@ -73,4 +75,3 @@ const index = () => {
 
 export default index
 
-// chave api https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API key}
