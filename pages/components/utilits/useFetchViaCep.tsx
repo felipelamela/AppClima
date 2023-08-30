@@ -1,28 +1,26 @@
 import React from 'react'
+import axios from 'axios';
+import useFetchOpenWeather from './useFechtOpenWeather';
 
 const useFetchViaCep = () => {
-  const [endereco, setEndereco] = React.useState<null>(null);
-  const [error, setError] = React.useState<string | null>(null);
+  const [endereco, setEndereco] = React.useState<string>('');
+  const [errorViaCep, setErrorViaCep] = React.useState<string | null>(null);
+  const { fetchOpenWeather } = useFetchOpenWeather()
 
-  const fetchCep = async (cep: string) => {
+
+  const fetchCep = (cep: string) => {
     try {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-      const data = await response.json();
-
-      if (data.erro) {
-        setEndereco(null);
-        setError('');
-      } else {
-        setEndereco(data);
-        setError(null);
-      }
+      axios.get(`http://viacep.com.br/ws/${cep}/json`)
+        .then(response => {
+          const local = response.data;
+          setEndereco(local.localidade)
+        })
     } catch (error) {
-      console.error('Error fetching address:', error);
-      setError('');
+      setErrorViaCep(error)
     }
   };
 
-  return { endereco, error, fetchCep };
+  return { endereco, setEndereco, errorViaCep, fetchCep };
 }
 
 export default useFetchViaCep
