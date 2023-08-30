@@ -3,47 +3,45 @@ import React from 'react'
 import Input from '../components/globalComponents/Input';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import useFetchViaCep from '../components/utilits/useFetchViaCep';
+import useFetchOpenWeather from '../components/utilits/useFechtOpenWeather';
 
 const index = () => {
   //buscador
   const [buscador, setBuscador] = React.useState<string>('')
+  const [local, setLocal] = React.useState('')
+
+  const { endereco, setEndereco, errorViaCep, fetchCep } = useFetchViaCep()
+  const { clima, errorOpenWeather, fetchOpenWeather } = useFetchOpenWeather()
 
   const router = useRouter()
+  React.useEffect(() => {
+    if (Number.isNaN(+router.query.endereco)) {
+      setEndereco(router.query.endereco)
+    } else {
+      setLocal(router.query.endereco)
+    }
+  }, [router])
 
   React.useEffect(() => {
-    if (router.query.cep !== undefined) {
-      console.log(typeof +router.query.cep)
-      axios.get(`http://viacep.com.br/ws/${router.query.cep}/json`)
-        .then(response => {
-          const endereco = response.data;
-          console.log(endereco)
-        
-        })
-        .catch(error => {
-          console.error('Erro ao consultar o CEP:', error);
-        });
-      router.query.cep = undefined
+    if (local.length === 8) {
+      fetchCep(local)
     }
-    else if (buscador.length === 8) {
-      axios.get(`http://viacep.com.br/ws/${buscador}/json`)
-        .then(response => {
-          const endereco = response.data;
-          console.log(endereco)
-        })
-        .catch(error => {
-          console.error('Erro ao consultar o CEP:', error);
-        });
-    }
-  }, [buscador])
+  }, [local])
 
+  React.useEffect(() => {
+    if (endereco) {
+      fetchOpenWeather(endereco)
+    }
+
+  }, [local, endereco])
 
   return (
     <>
-
-      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='number' />
+      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='string' />
       <button><Link href={{
         pathname: '/endereco',
-        query: { cep: `${buscador}` }
+        query: { endereco: `${buscador}` }
       }}>Buscar</Link></button>
 
     </>
@@ -51,11 +49,3 @@ const index = () => {
 }
 
 export default index
-
-
-
-// Apikey = https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=831abf463c39305a62a4a3ec257719a7
-
-//https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=${Apikey}&lang=pt_br
-
-//google key AIzaSyClJY-3CSa_j56ynCaBhccfX4_rKfBrNPE
