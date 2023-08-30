@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useFetchViaCep from '../components/utilits/useFetchViaCep';
 import useFetchOpenWeather from '../components/utilits/useFechtOpenWeather';
+import Header from '../components/sectionComponents/Header';
 
 const index = () => {
   //buscador
@@ -36,13 +37,10 @@ const index = () => {
 
   }, [local, endereco])
 
+  console.log(clima)
   return (
     <>
-      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='string' />
-      <button><Link href={{
-        pathname: '/endereco',
-        query: { endereco: `${buscador}` }
-      }}>Buscar</Link></button>
+      <Header segundaRota='forms' segundoBotao='Contato' />
 
     </>
   )

@@ -3,6 +3,10 @@ import axios from 'axios'
 import Input from './components/globalComponents/Input'
 import Link from 'next/link'
 import formatBuscador from './components/utilits/formatBuscador'
+import Header from './components/sectionComponents/Header'
+import Paragraph from './components/globalComponents/Paragraph'
+import Title from './components/globalComponents/Title'
+import TitleComponent from './components/sectionComponents/TitleComponent'
 
 
 const index = () => {
@@ -34,8 +38,7 @@ const index = () => {
   }, [])
 
   //fetch usuario local
-  /*
-    React.useEffect(() => {
+  React.useEffect(() => {
     if (latUser !== null) {
       axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latUser}&lon=${lngUser}&units=metric&appid=831abf463c39305a62a4a3ec257719a7`)
         .then(response => {
@@ -46,6 +49,7 @@ const index = () => {
           setTempMax(clima.main.temp_max)
           setCidade(clima.name)
           setTempNow(clima.main.feels_like)
+          console.log(clima)
         })
         .catch(error => {
           console.error(error);
@@ -54,24 +58,30 @@ const index = () => {
 
   }, [latUser])
 
+
   if (tempNow === null) return <p> Carregando </p>
- */
+
   return (
-    <>
-      <Input label='Buscar' type="text" valor={buscador} setValor={setBuscador} typeFormat='string' />
-      <button><Link href={{
-        pathname: '/endereco',
-        query: { endereco: `${formatBuscador(buscador)}` }
-      }}>Buscar</Link></button>
-      <h2>{pais}</h2>
-      <h3>{cidade}</h3>
-      <p>{tempNow}º</p>
-      <p>{tempMax}º</p>
-      <p>{tempMin}º</p>
-      <p>{umidade}%</p>
-    </>
+    <section>
+      <Header segundaRota="/forms" segundoBotao="Contato" />
+
+      <div>
+        <TitleComponent tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
+
+        <Paragraph tag='p' text='Dia da semana e data' />
+      </div>
+      <div>
+        <div>
+          <Paragraph tag='p' text={tempNow + 'º'} />
+        </div>
+        <Paragraph tag='p' text='Dia ou noite' />
+        <Paragraph tag='p' text={tempMax + 'º'} />
+        <Paragraph tag='p' text={tempMin + 'º'} />
+        <Paragraph tag='p' text={umidade + '%'} />
+
+      </div>
+    </section>
   )
 }
 
 export default index
-
