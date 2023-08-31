@@ -25,6 +25,7 @@ export interface InputFilesTypes {
 export interface ParagraphTypes {
   tag: 'p';
   text: string
+  fontSize?:string
 }
 
 export interface TitleTypes {

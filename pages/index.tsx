@@ -64,21 +64,19 @@ const index = () => {
   return (
     <section>
       <Header segundaRota="/forms" segundoBotao="Contato" />
-
       <div>
         <TitleComponent tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
-
-        <Paragraph tag='p' text='Dia da semana e data' />
       </div>
       <div>
         <div>
-          <Paragraph tag='p' text={tempNow + 'º'} />
+          <Paragraph tag='p' fontSize='5rem' text={tempNow + 'º |'} />
         </div>
+        <div>
         <Paragraph tag='p' text='Dia ou noite' />
         <Paragraph tag='p' text={tempMax + 'º'} />
         <Paragraph tag='p' text={tempMin + 'º'} />
         <Paragraph tag='p' text={umidade + '%'} />
-
+        </div>
       </div>
     </section>
   )

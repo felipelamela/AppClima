@@ -9,5 +9,5 @@ a {
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-
+  background: linear-gradient(90deg, #47809C, #00314F);
 }
