@@ -10,7 +10,7 @@ import Header from '../components/sectionComponents/Header';
 const index = () => {
   //buscador
   const [buscador, setBuscador] = React.useState<string>('')
-  const [local, setLocal] = React.useState('')
+  const [local, setLocal] = React.useState<string | string[]>('')
 
   const { endereco, setEndereco, errorViaCep, fetchCep } = useFetchViaCep()
   const { clima, errorOpenWeather, fetchOpenWeather } = useFetchOpenWeather()

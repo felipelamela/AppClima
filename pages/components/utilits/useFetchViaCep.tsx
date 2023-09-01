@@ -3,12 +3,12 @@ import axios from 'axios';
 import useFetchOpenWeather from './useFechtOpenWeather';
 
 const useFetchViaCep = () => {
-  const [endereco, setEndereco] = React.useState<string>('');
-  const [errorViaCep, setErrorViaCep] = React.useState<string | null>(null);
+  const [endereco, setEndereco] = React.useState<string | string[]>('');
+  const [errorViaCep, setErrorViaCep] = React.useState<string | string[]>('');
   const { fetchOpenWeather } = useFetchOpenWeather()
 
 
-  const fetchCep = (cep: string) => {
+  const fetchCep = (cep: string | string[]) => {
     try {
       axios.get(`http://viacep.com.br/ws/${cep}/json`)
         .then(response => {

@@ -1,12 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import Input from './components/globalComponents/Input'
-import Link from 'next/link'
-import formatBuscador from './components/utilits/formatBuscador'
 import Header from './components/sectionComponents/Header'
-import Paragraph from './components/globalComponents/Paragraph'
-import Title from './components/globalComponents/Title'
 import TitleComponent from './components/sectionComponents/TitleComponent'
+import WeatherToday from './components/sectionComponents/WeatherToday'
 
 
 const index = () => {
@@ -22,8 +18,6 @@ const index = () => {
   const [tempNow, setTempNow] = React.useState<number | null>(null)
   const [umidade, setUmidade] = React.useState<number | null>(null)
 
-  //buscador
-  const [buscador, setBuscador] = React.useState<string>('')
 
 
   //geolocal HTML5
@@ -62,23 +56,84 @@ const index = () => {
   if (tempNow === null) return <p> Carregando </p>
 
   return (
-    <section>
-      <Header segundaRota="/forms" segundoBotao="Contato" />
-      <div>
-        <TitleComponent tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
-      </div>
-      <div>
-        <div>
-          <Paragraph tag='p' fontSize='5rem' text={tempNow + 'º |'} />
+
+    <>
+      <section>
+        <Header segundaRota="/forms" segundoBotao="Contato" />
+        <div className='mainContent'>
+          <div className='divDados'>
+            <div >
+              <TitleComponent tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
+            </div>
+            <div >
+              <WeatherToday
+                tempNow={Math.floor(tempNow)}
+                tempMax={Math.floor(tempMax)}
+                tempMin={Math.floor(tempMin)}
+                umidade={Math.floor(umidade)}
+              />
+            </div>
+          </div>
+          <div className='divImagem'>
+            <img className='Imagem' src="/images/Tempo/Noite.png" alt="" />
+          </div>
+
         </div>
-        <div>
-        <Paragraph tag='p' text='Dia ou noite' />
-        <Paragraph tag='p' text={tempMax + 'º'} />
-        <Paragraph tag='p' text={tempMin + 'º'} />
-        <Paragraph tag='p' text={umidade + '%'} />
-        </div>
-      </div>
-    </section>
+
+      </section>
+
+      <style jsx>{`
+
+      section{
+        background: linear-gradient(90deg, #47809C, #00314F);
+        height:100vh;
+      }
+
+      .mainContent{
+        margin: 0 auto;
+        justify-content:space-around;
+        display:flex;
+        margin: 6rem auto 0;
+        align-items: center;
+      }
+      .divDados{
+        padding: 2rem;
+        max-width: 330px;
+      }
+      .divImagem{
+        max-width: 900px
+      }
+      .Imagem{
+        width:100%;
+        heigth:auto;
+      }
+      @media (max-width:800px){
+        .mainContent{
+          justify-items:center;
+          max-width: 1200px;
+          display:grid;
+          gap: 1rem;
+          margin: 0 auto ;
+
+        }
+        .divDados{
+          padding:0;
+          order:2;
+          position: relative;
+        } 
+        .divImagem{
+          order:1;
+
+        } 
+        .Imagem{
+          max-width:100%;
+          heigth:auto;
+
+        }
+      }
+    `}</style>
+    </>
+
   )
 }
 

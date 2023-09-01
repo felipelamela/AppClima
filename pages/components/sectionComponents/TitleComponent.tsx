@@ -13,23 +13,25 @@ interface TitleComponentType {
 
 const TitleComponent: React.FC<TitleComponentType> = ({ tagCidade, tagPais, cidade, pais }) => {
   return (
-    <>
+    <div className='containerLocal'>
       <div>
-        <Title tag={tagCidade} text={cidade} />
-        <Title tag={tagPais} text={pais} />
+        <Title tag={tagCidade} text={cidade} color='eeeeee' />
+        <Title tag={tagPais} text={pais} color='eeeeee' />
       </div>
       <div>
         <DataComponent />
       </div>
       <style jsx>{`
+        .containerLocal{
+          display:inline;
+          padding: 3rem 0 2rem
+        }
         div{
           display: flex;
           gap:8px;
-        }
-      
-      
+        }     
       `}</style>
-    </>
+    </div>
   )
 }
 

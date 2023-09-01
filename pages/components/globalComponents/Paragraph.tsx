@@ -1,7 +1,7 @@
 import React from 'react'
 import { ParagraphTypes } from '../../../types';
 
-const Paragraph: React.FC<ParagraphTypes> = ({ tag, text, fontSize='16px' }) => {
+const Paragraph: React.FC<ParagraphTypes> = ({ tag, text, fontSize = '16px', color }) => {
   const Tag = tag as keyof JSX.IntrinsicElements;
   return (
     <>
@@ -10,6 +10,7 @@ const Paragraph: React.FC<ParagraphTypes> = ({ tag, text, fontSize='16px' }) => 
         p{
           font-size:${fontSize};
           background:;
+          color: #${color}
         }
       
       `}</style>

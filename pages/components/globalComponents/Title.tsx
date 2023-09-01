@@ -2,7 +2,7 @@ import React from 'react'
 import { TitleTypes } from '../../../types';
 
 
-const Title: React.FC<TitleTypes> = ({ tag, text }) => {
+const Title: React.FC<TitleTypes> = ({ tag, text, color }) => {
   const Tag = tag as keyof JSX.IntrinsicElements;
   return (
     <>
@@ -14,6 +14,7 @@ const Title: React.FC<TitleTypes> = ({ tag, text }) => {
 
         h2{
           font-size:2.2rem;
+          color: #${color}
         }
 
         h3{

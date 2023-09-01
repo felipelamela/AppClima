@@ -1,9 +1,10 @@
 export interface InputTypes {
-  label: string;
+  label?: string;
   type: React.HTMLInputTypeAttribute;
   valor: string;
   setValor: Function;
   typeFormat: string;
+  placeholder?: string;
 }
 
 export interface ButtonTypes {
@@ -23,12 +24,14 @@ export interface InputFilesTypes {
 }
 
 export interface ParagraphTypes {
-  tag: 'p';
-  text: string
-  fontSize?:string
+  tag: "p";
+  text: string;
+  fontSize?: string;
+  color?: string;
 }
 
 export interface TitleTypes {
-  tag: 'h1' | 'h2' | 'h3';
-  text: string
+  tag: "h1" | "h2" | "h3";
+  text: string;
+  color?: string;
 }
