@@ -53,7 +53,7 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
         }
         .containerClima{
           display:grid;
-          grid-template-columns: 90px 110px;
+          grid-template-columns: 90px 115px;
           gap:10px;
           margin: 10px 0 0 0;
         }
