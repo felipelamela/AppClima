@@ -35,3 +35,17 @@ export interface TitleTypes {
   text: string;
   color?: string;
 }
+
+export interface ListaDeLocaisTypes {
+  id?: number;
+  cidade: string;
+  pais: string;
+  tempNow: number;
+  tempMax: number;
+  tempMin: number;
+  umidade: number;
+  vento: string;
+
+}
+
+

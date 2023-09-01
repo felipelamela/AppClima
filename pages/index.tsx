@@ -3,6 +3,7 @@ import axios from 'axios'
 import Header from './components/sectionComponents/Header'
 import TitleComponent from './components/sectionComponents/TitleComponent'
 import WeatherToday from './components/sectionComponents/WeatherToday'
+import Clima from "./components/globalComponents/Clima"
 
 
 const index = () => {
@@ -17,6 +18,9 @@ const index = () => {
   const [tempMin, setTempMin] = React.useState<number | null>(null)
   const [tempNow, setTempNow] = React.useState<number | null>(null)
   const [umidade, setUmidade] = React.useState<number | null>(null)
+  const [vento, setVento] = React.useState<number | null>(null)
+  const [clima, setClima] = React.useState<string | null>(null)
+  const [periodo, setPeriodo] = React.useState<string | null>(null)
 
 
 
@@ -28,6 +32,16 @@ const index = () => {
       console.log("Latitude:", latitude, "Longitude:", longitude);
       setLatUser(latitude)
       setLngUser(longitude)
+
+      const dataAtual = new Date()
+      const horas = dataAtual.getHours()
+      console.log(horas)
+      if (horas < 18 && horas > 4) {
+        setPeriodo("day ")
+      } else {
+        setPeriodo('night ')
+      }
+
     });
   }, [])
 
@@ -43,7 +57,8 @@ const index = () => {
           setTempMax(clima.main.temp_max)
           setCidade(clima.name)
           setTempNow(clima.main.feels_like)
-          console.log(clima)
+          setVento(clima.wind.speed)
+          setClima(clima.weather[0].description)
         })
         .catch(error => {
           console.error(error);
@@ -52,6 +67,7 @@ const index = () => {
 
   }, [latUser])
 
+  console.log(periodo)
 
   if (tempNow === null) return <p> Carregando </p>
 
@@ -71,12 +87,12 @@ const index = () => {
                 tempMax={Math.floor(tempMax)}
                 tempMin={Math.floor(tempMin)}
                 umidade={Math.floor(umidade)}
+                speed={vento}
               />
             </div>
           </div>
-          <div className='divImagem'>
-            <img className='Imagem' src="/images/Tempo/Noite.png" alt="" />
-          </div>
+          <Clima horario={periodo} clima={clima} />
+
 
         </div>
 
@@ -100,13 +116,7 @@ const index = () => {
         padding: 2rem;
         max-width: 330px;
       }
-      .divImagem{
-        max-width: 900px
-      }
-      .Imagem{
-        width:100%;
-        heigth:auto;
-      }
+
       @media (max-width:800px){
         .mainContent{
           justify-items:center;

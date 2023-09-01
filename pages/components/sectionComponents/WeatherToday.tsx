@@ -6,11 +6,12 @@ interface WeatherTodayTypes {
   tempMax: number
   tempMin: number
   umidade: number
+  speed: number
 }
 
 
 
-const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade }) => {
+const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade, speed }) => {
   return (
     <>
       <div className='containerTemp'>
@@ -34,7 +35,7 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
             </div>
             <div>
               <img src="/images/vento.svg" alt="" />
-              <Paragraph tag='p' text='12km/h' color='eeeeee' />
+              <Paragraph tag='p' text={speed + ' km/h'} color='eeeeee' />
             </div>
           </div>
         </div>
@@ -52,7 +53,7 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
         }
         .containerClima{
           display:grid;
-          grid-template-columns: 90px 90px;
+          grid-template-columns: 90px 110px;
           gap:10px;
           margin: 10px 0 0 0;
         }
