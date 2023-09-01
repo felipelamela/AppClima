@@ -17,6 +17,7 @@ const TextArea: React.FC<TextAreaTypes> = ({ name, valor, setValor }) => {
           font-size: 1.2rem;
           padding: .4rem ;
           font-weight: regular;
+          background:none;
         }
       `}</style>
     </>

@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Header from './components/sectionComponents/Header'
 import TitleComponent from './components/sectionComponents/TitleComponent'
 import WeatherToday from './components/sectionComponents/WeatherToday'
 import Clima from "./components/globalComponents/Clima"
@@ -23,7 +22,6 @@ const index = () => {
   const [periodo, setPeriodo] = React.useState<string | null>(null)
 
 
-
   //geolocal HTML5
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -33,14 +31,7 @@ const index = () => {
       setLatUser(latitude)
       setLngUser(longitude)
 
-      const dataAtual = new Date()
-      const horas = dataAtual.getHours()
-      console.log(horas)
-      if (horas < 18 && horas > 4) {
-        setPeriodo("day ")
-      } else {
-        setPeriodo('night ')
-      }
+      setPeriodo(localStorage.getItem('periodo'))
 
     });
   }, [])
@@ -75,7 +66,6 @@ const index = () => {
 
     <>
       <section>
-        <Header segundaRota="/forms" segundoBotao="Contato" />
         <div className='mainContent'>
           <div className='divDados'>
             <div >
@@ -99,11 +89,6 @@ const index = () => {
       </section>
 
       <style jsx>{`
-
-      section{
-        background: linear-gradient(90deg, #47809C, #00314F);
-        height:100vh;
-      }
 
       .mainContent{
         margin: 0 auto;

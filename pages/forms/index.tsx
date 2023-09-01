@@ -1,13 +1,25 @@
 import React from 'react'
 import Forms from '../components/sectionComponents/Forms'
-import Header from '../components/sectionComponents/Header'
+
 
 const index = () => {
+  const [horario, setHorario] = React.useState<number | null>(null)
+
+
+  React.useEffect(() => {
+    const dataAtual = new Date()
+    const horas = dataAtual.getHours()
+    setHorario(horas)
+  }, [])
+
+
   return (
-    <>
-      <Header segundaRota='/' segundoBotao="Principal" />
+    <section>
       <Forms />
-    </>
+      <style jsx>{`
+
+      `}</style>
+    </section>
   )
 }
 

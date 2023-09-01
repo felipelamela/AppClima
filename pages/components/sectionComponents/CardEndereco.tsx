@@ -10,34 +10,36 @@ const CardEndereco: React.FC<ListaDeLocaisTypes> = ({
   tempMax,
   tempMin,
   umidade,
-  vento }) => {
+  vento,
+  color
+}) => {
   return (
     <div>
       <div>
-        <Title tag='h2' text={cidade + ' | ' + pais} color='eeeeee'/>
+        <Title tag='h2' text={cidade + ' | ' + pais} color={color} />
       </div>
 
       <div className='containerTemp'>
         <div>
-          <Paragraph tag='p' fontSize='3rem' text={Math.floor(tempNow) + 'º|'} color='eeeeee' />
+          <Paragraph tag='p' fontSize='3rem' text={Math.floor(tempNow) + 'º|'} color={color} />
         </div>
         <div className='containerDados'>
           <div className='containerClima'>
             <div>
               <img src="/images/termometro.svg" alt="" />
-              <Paragraph tag='p' text={'Max:  ' + Math.floor(tempMax) + 'º'} color='eeeeee' />
+              <Paragraph tag='p' text={'Max:  ' + Math.floor(tempMax) + 'º'} color={color} />
             </div>
             <div>
               <img src="/images/termometro.svg" alt="" />
-              <Paragraph tag='p' text={'Min:  ' + Math.floor(tempMin) + 'º'} color='eeeeee' />
+              <Paragraph tag='p' text={'Min:  ' + Math.floor(tempMin) + 'º'} color={color} />
             </div>
             <div>
               <img src="/images/gotas.svg" alt="" />
-              <Paragraph tag='p' text={Math.floor(umidade) + '%'} color='eeeeee' />
+              <Paragraph tag='p' text={Math.floor(umidade) + '%'} color={color} />
             </div>
             <div>
               <img src="/images/vento.svg" alt="" />
-              <Paragraph tag='p' text={vento + ' km/h'} color='eeeeee' />
+              <Paragraph tag='p' text={vento + ' km/h'} color={color} />
             </div>
           </div>
         </div>
@@ -63,8 +65,6 @@ const CardEndereco: React.FC<ListaDeLocaisTypes> = ({
       display: flex;
       align-itens:center;
     }
-
-
     img{
       margin:0;
       padding: 0 5px 0 0;

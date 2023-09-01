@@ -5,6 +5,7 @@ export interface InputTypes {
   setValor: Function;
   typeFormat: string;
   placeholder?: string;
+  color?: string;
 }
 
 export interface ButtonTypes {
@@ -45,7 +46,12 @@ export interface ListaDeLocaisTypes {
   tempMin: number;
   umidade: number;
   vento: string;
-
+  color?: string;
 }
 
 
+export interface ButtonContatoType {
+  rota: string
+  nome: string
+  color?:string
+}

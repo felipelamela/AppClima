@@ -22,19 +22,19 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
           <Paragraph tag='p' text='Dia ou noite' color='eeeeee' />
           <div className='containerClima'>
             <div>
-              <img src="/images/termometro.svg" alt="" />
+              <img width={25} height={25} src="/images/termometro.svg" alt="" />
               <Paragraph tag='p' text={'Max:  ' + tempMax + 'º'} color='eeeeee' />
             </div>
             <div>
-              <img src="/images/termometro.svg" alt="" />
+              <img width={25} height={25} src="/images/termometro.svg" alt="" />
               <Paragraph tag='p' text={'Min:  ' + tempMin + 'º'} color='eeeeee' />
             </div>
             <div>
-              <img src="/images/gotas.svg" alt="" />
+              <img width={25} height={25} src="/images/gotas.svg" alt="" />
               <Paragraph tag='p' text={umidade + '%'} color='eeeeee' />
             </div>
             <div>
-              <img src="/images/vento.svg" alt="" />
+              <img width={25} height={25} src="/images/vento.svg" alt="" />
               <Paragraph tag='p' text={speed + ' km/h'} color='eeeeee' />
             </div>
           </div>

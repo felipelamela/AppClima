@@ -1,36 +1,54 @@
-import React from 'react'
-
 const horario = {
-  0: 'Meia-Noite',
-  1: 'Uma Hora',
-  2: 'Duas Horas',
-  3: 'Três Horas',
-  4: 'Quatro Horas',
-  5: 'Cinco Horas',
-  6: 'Seis Horas',
-  7: 'Sete Horas',
-  8: 'Oito Horas',
-  9: 'Nove Horas',
-  10: 'Dez Horas',
-  11: 'Onze Horas',
-  12: 'Meio-Dia',
-  13: 'Uma Hora',
-  14: 'Duas Horas',
-  15: 'Três Horas',
-  16: 'Quatro Horas',
-  17: 'Cinco Horas',
-  18: 'Seis Horas',
-  19: 'Sete Horas',
-  20: 'Oito Horas',
-  21: 'Nove Horas',
-  22: 'Dez Horas',
-  23: 'Onze Horas'
+
+  1: 'linear-gradient(90deg, #6122c3, #ffa000)', //das 4 as 6
+  2: 'linear-gradient(90deg, #ffa000, #ffe500)', // das 6 as 10
+  3: 'linear-gradient(90deg, #ffe500, #ffe87b)', //das 10 as 13
+  4: 'linear-gradient(90deg, #ffe87b, #f14a4f)', //das 13 as 15
+  5: 'linear-gradient(90deg, #ffe87b, #b11217)', // das 15 as 16
+  6: 'linear-gradient(90deg, #b11217, #a71d87)', // das 16 as 17
+  7: 'linear-gradient(90deg, #a71d87, #6c22c3)', // das 17 as 19
+  8: 'linear-gradient(90deg, #6c22c3, #291779)', // as 19 as 22
+  9: 'linear-gradient(90deg, #291779, #6122c3)', //das 22 as 4
 }
 
 
 const backgroundModule = (hora?: number) => {
 
-  return horario[hora]
+  if (hora <= 4 && hora > 22) {
+    return horario[9]
+  }
+  if (hora <= 6) {
+    return horario[1]
+  }
+
+  if (hora <= 10) {
+    return horario[2]
+  }
+
+  if (hora <= 13) {
+    return horario[3]
+  }
+
+  if (hora <= 15) {
+    return horario[4]
+  }
+
+  if (hora <= 16) {
+    return horario[5]
+  }
+
+  if (hora <= 17) {
+    return horario[6]
+  }
+
+  if (hora <= 19) {
+    return horario[7]
+  }
+
+  if (hora <= 22) {
+    return horario[8]
+  }
+
 }
 
 export default backgroundModule

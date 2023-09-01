@@ -2,7 +2,7 @@ import React from 'react'
 import { InputTypes } from '../../../types'
 
 
-const Input: React.FC<InputTypes> = ({ label, type, valor, setValor, typeFormat, placeholder }) => {
+const Input: React.FC<InputTypes> = ({ label, type, valor, setValor, typeFormat, placeholder, color }) => {
 
   //validação de numero && string
   function format(e: React.ChangeEvent<HTMLInputElement>, typeFormat: string) {
@@ -35,6 +35,7 @@ const Input: React.FC<InputTypes> = ({ label, type, valor, setValor, typeFormat,
           padding: .4rem;
           border:none;
           background:none;
+          color:${color};
         }
         input:focus{
           box-shadow:0 0 0 0;

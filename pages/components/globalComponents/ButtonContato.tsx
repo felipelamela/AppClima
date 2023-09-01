@@ -1,12 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
+import { ButtonContatoType } from '../../../types'
 
-interface ButtonContatoType {
-  rota: string
-  nome: string
-}
 
-const ButtonContato: React.FC<ButtonContatoType> = ({ rota, nome }) => {
+const ButtonContato: React.FC<ButtonContatoType> = ({ rota, nome, color }) => {
   return (
     <>
       <a href={rota}>{nome}</a >
@@ -16,9 +12,9 @@ const ButtonContato: React.FC<ButtonContatoType> = ({ rota, nome }) => {
           padding: 1rem 2rem; 
           border-radius: 10px;
           font-size:1.2rem;
-          color: #eeeeee;
+          color: ${color};
           background:#ffffff10;
-          border:1px solid #eeeeee
+          border:1px solid ${color}
         }
       
       `}</style>

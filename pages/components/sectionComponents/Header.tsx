@@ -6,26 +6,23 @@ import ButtonContato from '../globalComponents/ButtonContato'
 
 
 
-const Header = ({ segundaRota, segundoBotao }) => {
+const Header = ({ segundaRota, segundoBotao, color }) => {
   const [buscador, setBuscador] = React.useState<string>('')
 
   return (
     <>
       <div className='containerHeader'>
         <div className='containerBusca'>
-          <Input label='' type='text' valor={buscador} setValor={setBuscador} typeFormat='string' />
+          <Input color={color} label=' ' type='text' valor={buscador} setValor={setBuscador} typeFormat='string' />
           <Link href={{
             pathname: '/endereco',
             query: { endereco: `${formatBuscador(buscador)}` }
-          }}><img src='/images/lupa.svg' /></Link>
+          }}><img src='/images/lupa.svg'  alt='busca'/></Link>
         </div>
-        <ButtonContato rota={segundaRota} nome={segundoBotao} />
+        <ButtonContato color={color} rota={segundaRota} nome={segundoBotao} />
 
       </div>
       <style jsx>{`
-      .buttonContato{
-        background:red;
-      }
       .containerHeader{
           margin: 0 auto;
           display:flex;
@@ -53,7 +50,7 @@ const Header = ({ segundaRota, segundoBotao }) => {
         .containerBusca{
           padding:0;
           background:#ffffff10;
-          border:1px solid #eeeeee;
+          border:1px solid ${color};
           padding:.3rem  1rem 0 .3rem;
           margin:1rem;
           border-radius:10px;
