@@ -40,13 +40,13 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <main className={montserrat.className}>
-        <Header color={'black'} segundaRota="/forms" segundoBotao="Contato" />
+        <Header color={'white'} segundaRota="/forms" segundoBotao="Contato" />
         <Component{...pageProps} />
       </main>
       <style jsx>{`
         main{
-          background: ${backgroundModule(horario)};
-          height:100vh;
+          background: ${backgroundModule(horario)}
+          
         }
       
       `}</style>

@@ -61,7 +61,6 @@ const index = () => {
   function handleButton(id?: number) {
     const lista = listaUsuario.filter(user => user.id !== id)
     setListaUsuario(lista)
-    console.log(listaUsuario)
   }
 
   return (

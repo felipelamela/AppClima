@@ -34,7 +34,8 @@ const CardEndereco: React.FC<ListaDeLocaisTypes> = ({
               <Paragraph tag='p' text={'Min:  ' + Math.floor(tempMin) + 'º'} color={color} />
             </div>
             <div>
-              <img src="/images/gotas.svg" alt="" />
+            <img src="/images/gotasblack.svg" alt="" />
+            <img src="/images/gotas.svg" alt="" />
               <Paragraph tag='p' text={Math.floor(umidade) + '%'} color={color} />
             </div>
             <div>

@@ -7,11 +7,12 @@ interface WeatherTodayTypes {
   tempMin: number
   umidade: number
   speed: number
+  periodo:string
 }
 
 
 
-const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade, speed }) => {
+const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade, speed, periodo }) => {
   return (
     <>
       <div className='containerTemp'>
@@ -22,19 +23,19 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
           <Paragraph tag='p' text='Dia ou noite' color='eeeeee' />
           <div className='containerClima'>
             <div>
-              <img width={25} height={25} src="/images/termometro.svg" alt="" />
+              <img width={25} height={25} src={`/images/termometro${periodo =='day'? 'day': 'night'}.svg`} alt="" />
               <Paragraph tag='p' text={'Max:  ' + tempMax + 'º'} color='eeeeee' />
             </div>
             <div>
-              <img width={25} height={25} src="/images/termometro.svg" alt="" />
+              <img width={25} height={25} src={`/images/termometro${periodo =='day'? 'day': 'night'}.svg`} alt="" />
               <Paragraph tag='p' text={'Min:  ' + tempMin + 'º'} color='eeeeee' />
             </div>
             <div>
-              <img width={25} height={25} src="/images/gotas.svg" alt="" />
+              <img width={25} height={25} src={`/images/gotas${periodo =="day"? 'day':'night'}.svg`} alt="" />
               <Paragraph tag='p' text={umidade + '%'} color='eeeeee' />
             </div>
             <div>
-              <img width={25} height={25} src="/images/vento.svg" alt="" />
+              <img width={25} height={25} src={`/images/vento${periodo =="day"? 'day': 'night'}.svg`} alt="" />
               <Paragraph tag='p' text={speed + ' km/h'} color='eeeeee' />
             </div>
           </div>
@@ -61,15 +62,12 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
           display: flex;
           align-itens:center;
         }
-
-
         img{
           margin:0;
           padding: 0 5px 0 0;
           max-width:25px;
           max-height: 25px
-        }
-      
+        }     
       `}</style>
 
     </>

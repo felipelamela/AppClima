@@ -7,6 +7,7 @@ const useFetchOpenWeather = (lista?: ListaDeLocaisTypes[]) => {
   const [errorOpenWeather, setErrorOpenWeather] = React.useState<string | string[]>('');
 
   const fetchOpenWeather = (cidade: string | string[]) => {
+    console.log(cidade)
     try {
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=831abf463c39305a62a4a3ec257719a7`)
         .then(response => {
@@ -22,9 +23,9 @@ const useFetchOpenWeather = (lista?: ListaDeLocaisTypes[]) => {
             vento: local.wind.speed,
           }
           setClima(dados)
-          console.log(local)
         })
     } catch (error) {
+      console.log(cidade)
       setErrorOpenWeather(error);
     }
   };

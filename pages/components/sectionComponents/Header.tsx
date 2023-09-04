@@ -8,6 +8,12 @@ import ButtonContato from '../globalComponents/ButtonContato'
 
 const Header = ({ segundaRota, segundoBotao, color }) => {
   const [buscador, setBuscador] = React.useState<string>('')
+  const [periodo, setPeriodo] = React.useState<string>('day')
+
+
+  React.useEffect(()=>{
+    setPeriodo(localStorage.getItem('periodo'))
+  },[])
 
   return (
     <>
@@ -17,7 +23,7 @@ const Header = ({ segundaRota, segundoBotao, color }) => {
           <Link href={{
             pathname: '/endereco',
             query: { endereco: `${formatBuscador(buscador)}` }
-          }}><img src='/images/lupa.svg'  alt='busca'/></Link>
+          }}><img src={`/images/lupa${periodo =="day"? 'day' :'night'}.svg`}  alt='busca'/></Link>
         </div>
         <ButtonContato color={color} rota={segundaRota} nome={segundoBotao} />
 

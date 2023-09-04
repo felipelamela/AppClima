@@ -78,6 +78,7 @@ const index = () => {
                 tempMin={Math.floor(tempMin)}
                 umidade={Math.floor(umidade)}
                 speed={vento}
+                periodo={periodo}
               />
             </div>
           </div>
