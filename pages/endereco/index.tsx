@@ -6,6 +6,7 @@ import Header from '../components/sectionComponents/Header';
 import { ListaDeLocaisTypes } from '../../types';
 import CardEndereco from '../components/sectionComponents/CardEndereco';
 import backgroundModule from '../components/utilits/backgroundModule';
+import { error } from 'console';
 
 const fundo = {
   'day': 'linear-gradient(90deg, rgba(81, 159, 223, 1), rgba(214, 110, 11, 1))',
@@ -20,8 +21,7 @@ const index = () => {
   const [horario, setHorario] = React.useState<number | null>(null)
 
   const { endereco, setEndereco, errorViaCep, fetchCep } = useFetchViaCep()
-  const { clima, errorOpenWeather, fetchOpenWeather } = useFetchOpenWeather(listaUsuario)
-
+  const { clima, errorOpenWeather, fetchOpenWeather, setErrorOpenWeather } = useFetchOpenWeather(listaUsuario)
 
   const router = useRouter()
   React.useEffect(() => {
@@ -44,19 +44,26 @@ const index = () => {
   }, [local])
 
   React.useEffect(() => {
+
     if (endereco) {
       fetchOpenWeather(endereco)
     }
 
   }, [local, endereco])
-  React.useEffect(() => {
 
+  React.useEffect(() => {
+    if (errorOpenWeather) {
+      setTimeout(() => {
+        setErrorOpenWeather('')
+      }, 2000)
+    }
+  }, [errorOpenWeather])
+
+  React.useEffect(() => {
     if (clima) {
       setListaUsuario([...listaUsuario, clima])
     }
-
   }, [clima])
-  console.log(backgroundModule(3))
 
   function handleButton(id?: number) {
     const lista = listaUsuario.filter(user => user.id !== id)
@@ -65,6 +72,7 @@ const index = () => {
 
   return (
     <section>
+      {errorOpenWeather && <p>{errorOpenWeather}</p>}
       <div className='glob'>
         {listaUsuario.map((user, index) => (
           <div key={index} className='containerCard'>
@@ -76,16 +84,28 @@ const index = () => {
               tempMin={user.tempMin}
               umidade={user.umidade}
               vento={user.vento}
-              color={horario > 5 && horario < 18 ? 'black' : "white"}
             />
             <button onClick={e => handleButton(user.id)}>&#x2715;</button>
           </div>
         ))}
       </div>
       <style jsx>{`
+      p{
+        position:absolute;
+        top:50px;
+        background:#a12f2f;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        color: white;
+        animation: Error .2s ease;
+        left: 50%; 
+        white-space: nowrap;
+        transform: translateX(-50%);
+      }
         .glob{
           max-height: 650px;
           overflow: auto;
+          box-size:border-box;
         }
         .containerCard{
           display: flex;
@@ -102,7 +122,7 @@ const index = () => {
           border: none;
           border-radius:5px;
           color: ${horario > 5 && horario < 18 ? 'black' : "white"};
-          background:rgba(194, 45, 21, 1);
+          background:#FF000070;
           cursor:pointer;
         }
         @media(max-width: 700px){
@@ -110,7 +130,19 @@ const index = () => {
             max-height: 500px;
             overflow: auto;
           }
+          p{
+            top:220px;
+          }
         }
+
+        @keyframes Error{
+          from{
+            opacity:0
+          }to{
+            opacity:1
+          }
+        }
+
 
         `}</style>
 

@@ -10,36 +10,43 @@ const CardEndereco: React.FC<ListaDeLocaisTypes> = ({
   tempMax,
   tempMin,
   umidade,
-  vento,
-  color
+  vento
 }) => {
+  const [color, setColor] = React.useState<string | null>(null)
+  const [periodo, setPeriodo] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    setPeriodo(localStorage.getItem('periodo'))
+    setColor(localStorage.getItem('cor'))
+  }, [])
+  if (periodo == null) return null
+
   return (
-    <div>
+    <div className='contGlob'>
       <div>
         <Title tag='h2' text={cidade + ' | ' + pais} color={color} />
       </div>
 
       <div className='containerTemp'>
         <div>
-          <Paragraph tag='p' fontSize='3rem' text={Math.floor(tempNow) + 'º|'} color={color} />
+          <Paragraph tag='p' fontSize='3rem' text={Math.floor(tempNow) + 'ºc'} color={color} />
         </div>
         <div className='containerDados'>
           <div className='containerClima'>
             <div>
-              <img src="/images/termometro.svg" alt="" />
+              <img src={`/images/termometro${periodo.trim()}.svg`} alt="" />
               <Paragraph tag='p' text={'Max:  ' + Math.floor(tempMax) + 'º'} color={color} />
             </div>
             <div>
-              <img src="/images/termometro.svg" alt="" />
+              <img src={`/images/termometro${periodo.trim()}.svg`} alt="" />
               <Paragraph tag='p' text={'Min:  ' + Math.floor(tempMin) + 'º'} color={color} />
             </div>
             <div>
-            <img src="/images/gotasblack.svg" alt="" />
-            <img src="/images/gotas.svg" alt="" />
+              <img src={`/images/gotas${periodo.trim()}.svg`} alt="" />
               <Paragraph tag='p' text={Math.floor(umidade) + '%'} color={color} />
             </div>
             <div>
-              <img src="/images/vento.svg" alt="" />
+              <img src={`/images/vento${periodo.trim()}.svg`} alt="" />
               <Paragraph tag='p' text={vento + ' km/h'} color={color} />
             </div>
           </div>
@@ -71,6 +78,17 @@ const CardEndereco: React.FC<ListaDeLocaisTypes> = ({
       padding: 0 5px 0 0;
       max-width:25px;
       max-height: 25px
+    }
+    @media(max-width:430px){
+      .contGlob{
+        text-align: center;
+      }
+      .containerTemp{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      
+      }
     }
     `}</style>
 

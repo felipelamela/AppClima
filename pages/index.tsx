@@ -3,6 +3,7 @@ import axios from 'axios'
 import TitleComponent from './components/sectionComponents/TitleComponent'
 import WeatherToday from './components/sectionComponents/WeatherToday'
 import Clima from "./components/globalComponents/Clima"
+import Loading from './components/sectionComponents/Loading'
 
 
 const index = () => {
@@ -19,25 +20,33 @@ const index = () => {
   const [umidade, setUmidade] = React.useState<number | null>(null)
   const [vento, setVento] = React.useState<number | null>(null)
   const [clima, setClima] = React.useState<string | null>(null)
-  const [periodo, setPeriodo] = React.useState<string | null>(null)
 
+  //periodo do dia
+  const [periodo, setPeriodo] = React.useState<string | null>(null)
+  const [color, setColor] = React.useState<string | null>(null)
+
+  //loading page
+  const [loading, setLoading] = React.useState<boolean>(false)
 
   //geolocal HTML5
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-      console.log("Latitude:", latitude, "Longitude:", longitude);
       setLatUser(latitude)
       setLngUser(longitude)
 
+      //periodo do dia
       setPeriodo(localStorage.getItem('periodo'))
+      //cor
+      setColor(localStorage.getItem('cor'))
 
     });
   }, [])
 
   //fetch usuario local
   React.useEffect(() => {
+    setLoading(!loading)
     if (latUser !== null) {
       axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latUser}&lon=${lngUser}&units=metric&appid=831abf463c39305a62a4a3ec257719a7`)
         .then(response => {
@@ -55,38 +64,39 @@ const index = () => {
           console.error(error);
         });
     }
-
+    setLoading(!loading)
   }, [latUser])
 
-  console.log(periodo)
-
-  if (tempNow === null) return <p> Carregando </p>
-
+  if (loading) return <Loading />
   return (
 
     <>
       <section>
-        <div className='mainContent'>
-          <div className='divDados'>
-            <div >
-              <TitleComponent tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
+        {!loading && (
+          <div className='mainContent'>
+            <div className='divDados'>
+              <div >
+                <TitleComponent color={color} tagCidade='h2' tagPais='h2' cidade={cidade + ' |'} pais={pais} />
+              </div>
+              <div >
+                <WeatherToday
+                  tempNow={Math.floor(tempNow)}
+                  tempMax={Math.floor(tempMax)}
+                  tempMin={Math.floor(tempMin)}
+                  umidade={Math.floor(umidade)}
+                  speed={vento}
+                  periodo={periodo}
+                  color={color}
+                  loading={loading}
+                />
+              </div>
             </div>
-            <div >
-              <WeatherToday
-                tempNow={Math.floor(tempNow)}
-                tempMax={Math.floor(tempMax)}
-                tempMin={Math.floor(tempMin)}
-                umidade={Math.floor(umidade)}
-                speed={vento}
-                periodo={periodo}
-              />
-            </div>
+            <Clima horario={periodo} clima={clima} />
+
+
           </div>
-          <Clima horario={periodo} clima={clima} />
 
-
-        </div>
-
+        )}
       </section>
 
       <style jsx>{`

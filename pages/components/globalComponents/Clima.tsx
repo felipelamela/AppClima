@@ -13,11 +13,20 @@ const ClimaAtual = {
   "day broken clouds": "/images/Tempo/Nuvens.png",
   "night broken clouds": "/images/Tempo/Nuvens.png",
 
+  "day overcast clouds": "/images/Tempo/Nuvens.png",
+  "night overcast clouds": "/images/Tempo/Nuvens.png",
+
   "day shower rain": "/images/Tempo/Chuva.png",
   "night shower rain": "/images/Tempo/Chuva.png",
 
   "day rain": "/images/Tempo/Chuva.png",
   "night rain": "/images/Tempo/Chuva.png",
+
+  "day light rain": "/images/Tempo/Tempestade.png",
+  "night light rain": "/images/Tempo/Tempestade.png",
+
+  "day heavy intensity rain": "/images/Tempo/Tempestade.png",
+  "night heavy intensity rain": "/images/Tempo/Tempestade.png",
 
   "day thunderstorm": "/images/Tempo/Tempestade.png",
   "night thunderstorm": "/images/Tempo/Tempestade.png",
@@ -32,15 +41,18 @@ const ClimaAtual = {
 interface ClimaTypes {
   horario: string,
   clima: string
+  loading?: boolean
 
 }
 
-const Clima: React.FC<ClimaTypes> = ({horario, clima}) => {
+const Clima: React.FC<ClimaTypes> = ({ horario, clima, loading }) => {
   return (
     <>
-      <div className="divImagem">
-        <img className="Imagem" src={ClimaAtual[horario + clima]} alt="" />
-      </div>
+      {!loading &&
+        <div className="divImagem">
+          <img className="Imagem" src={ClimaAtual[horario + clima]} alt="" />
+        </div>
+      }
       <style jsx>{`
         .divImagem {
           max-width: 900px;

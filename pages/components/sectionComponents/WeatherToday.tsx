@@ -7,41 +7,47 @@ interface WeatherTodayTypes {
   tempMin: number
   umidade: number
   speed: number
-  periodo:string
+  periodo?: string
+  color?: string
+  loading?: boolean
 }
 
 
 
-const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade, speed, periodo }) => {
+const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, umidade, speed, periodo, color, loading}) => {
+
+  if (color === null) return null
+
   return (
     <>
-      <div className='containerTemp'>
-        <div>
-          <Paragraph tag='p' fontSize='5rem' text={tempNow + 'º|'} color='eeeeee' />
-        </div>
-        <div className='containerDados'>
-          <Paragraph tag='p' text='Dia ou noite' color='eeeeee' />
-          <div className='containerClima'>
-            <div>
-              <img width={25} height={25} src={`/images/termometro${periodo =='day'? 'day': 'night'}.svg`} alt="" />
-              <Paragraph tag='p' text={'Max:  ' + tempMax + 'º'} color='eeeeee' />
-            </div>
-            <div>
-              <img width={25} height={25} src={`/images/termometro${periodo =='day'? 'day': 'night'}.svg`} alt="" />
-              <Paragraph tag='p' text={'Min:  ' + tempMin + 'º'} color='eeeeee' />
-            </div>
-            <div>
-              <img width={25} height={25} src={`/images/gotas${periodo =="day"? 'day':'night'}.svg`} alt="" />
-              <Paragraph tag='p' text={umidade + '%'} color='eeeeee' />
-            </div>
-            <div>
-              <img width={25} height={25} src={`/images/vento${periodo =="day"? 'day': 'night'}.svg`} alt="" />
-              <Paragraph tag='p' text={speed + ' km/h'} color='eeeeee' />
+      {!loading &&
+        <div className='containerTemp'>
+          <div>
+            <Paragraph tag='p' fontSize='5rem' text={tempNow + 'ºc'} color={color} />
+          </div>
+          <div className='containerDados'>
+            <Paragraph tag='p' text={periodo.trim() === 'day' ? 'Dia' : 'Noite'} color={color} />
+            <div className='containerClima'>
+              <div>
+                <img width={25} height={25} src={`/images/termometro${periodo.trim()}.svg`} alt="" />
+                <Paragraph tag='p' text={'Max:  ' + tempMax + 'º'} color={color} />
+              </div>
+              <div>
+                <img width={25} height={25} src={`/images/termometro${periodo.trim()}.svg`} alt="" />
+                <Paragraph tag='p' text={'Min:  ' + tempMin + 'º'} color={color} />
+              </div>
+              <div>
+                <img width={25} height={25} src={`/images/gotas${periodo.trim()}.svg`} alt="" />
+                <Paragraph tag='p' text={umidade + '%'} color={color} />
+              </div>
+              <div>
+                <img width={25} className='tes' height={25} src={`/images/vento${periodo.trim()}.svg`} alt="" />
+                <Paragraph tag='p' text={speed + ' km/h'} color={color} />
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
+        </div>}
       <style jsx>{`
         .containerTemp{
           display:flex;
@@ -54,7 +60,7 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
         }
         .containerClima{
           display:grid;
-          grid-template-columns: 90px 115px;
+          grid-template-columns: 115px 115px;
           gap:10px;
           margin: 10px 0 0 0;
         }
@@ -67,7 +73,17 @@ const WeatherToday: React.FC<WeatherTodayTypes> = ({ tempNow, tempMax, tempMin, 
           padding: 0 5px 0 0;
           max-width:25px;
           max-height: 25px
-        }     
+        }    
+
+        @media(max-width: 530px){
+          .containerTemp{
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+          }
+        }
+
+
       `}</style>
 
     </>

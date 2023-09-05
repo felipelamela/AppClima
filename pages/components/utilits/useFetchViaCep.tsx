@@ -16,11 +16,10 @@ const useFetchViaCep = () => {
           setEndereco(local.localidade)
         })
     } catch (error) {
-      console.log(error)
       setErrorViaCep(error)
     }
 
-    console.log(errorViaCep)
+
   };
 
   return { endereco, setEndereco, errorViaCep, fetchCep };

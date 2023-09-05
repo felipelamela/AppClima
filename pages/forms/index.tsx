@@ -3,23 +3,19 @@ import Forms from '../components/sectionComponents/Forms'
 
 
 const index = () => {
-  const [horario, setHorario] = React.useState<number | null>(null)
-
-
-  React.useEffect(() => {
-    const dataAtual = new Date()
-    const horas = dataAtual.getHours()
-    setHorario(horas)
-  }, [])
-
 
   return (
-    <section>
-      <Forms />
-      <style jsx>{`
+    <>
+      <section>
+        <Forms />
+      </section>
 
+      <style jsx>{`
+        section{
+          padding: 3rem 0 0; 
+        }
       `}</style>
-    </section>
+    </>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { ButtonTypes } from '../../../types'
 
 
-const Button: React.FC<ButtonTypes> = ({ name }) => {
+const Button: React.FC<ButtonTypes> = ({ name, color }) => {
   return (
     <>
       <button >{name}</button>
@@ -10,7 +10,12 @@ const Button: React.FC<ButtonTypes> = ({ name }) => {
         button{
           justify-self:flex-start;
           display:block;
-          margin:0;
+          padding: 1rem 2rem; 
+          border-radius: 10px;
+          font-size:1rem;
+          color: #${color};
+          background:#ffffff10;
+          border:1px solid #${color}
         }
       `}</style>
 

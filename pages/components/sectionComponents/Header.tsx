@@ -6,31 +6,53 @@ import ButtonContato from '../globalComponents/ButtonContato'
 
 
 
-const Header = ({ segundaRota, segundoBotao, color }) => {
+const Header = ({ segundaRota, segundoBotao }) => {
   const [buscador, setBuscador] = React.useState<string>('')
-  const [periodo, setPeriodo] = React.useState<string>('day')
+  const [periodo, setPeriodo] = React.useState<string | null>(null)
+  const [color, setColor] = React.useState<string | null>(null)
 
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     setPeriodo(localStorage.getItem('periodo'))
-  },[])
+    setColor(localStorage.getItem('cor'))
+
+  }, [])
+
+  if (periodo == null) return null
 
   return (
     <>
-      <div className='containerHeader'>
-        <div className='containerBusca'>
-          <Input color={color} label=' ' type='text' valor={buscador} setValor={setBuscador} typeFormat='string' />
-          <Link href={{
-            pathname: '/endereco',
-            query: { endereco: `${formatBuscador(buscador)}` }
-          }}><img src={`/images/lupa${periodo =="day"? 'day' :'night'}.svg`}  alt='busca'/></Link>
+      <div className='containerH'>
+        <div>
+          <a className='Home' href='/'>ClimApp</a>
         </div>
-        <ButtonContato color={color} rota={segundaRota} nome={segundoBotao} />
+        <div className='containerHeader'>
+          <div className='containerBusca'>
+            <Input color={color} label=' ' type='text' valor={buscador} setValor={setBuscador} pressDown={formatBuscador} typeFormat='string' />
+            <Link href={{
+              pathname: '/endereco',
+              query: { endereco: `${formatBuscador(buscador)}` }
+            }}><img width={30} height={30} src={`/images/lupa${periodo.trim()}.svg`} alt='busca' /></Link>
+          </div>
+          <ButtonContato color={color} rota={segundaRota} nome={segundoBotao} />
 
+        </div>
       </div>
       <style jsx>{`
-      .containerHeader{
+      .Home{
+        color:#${color};
+        font-size:2rem;
+      }
+      .containerH{
           margin: 0 auto;
+          display:flex;
+          justify-content:space-between;
+          max-width: 1400px;
+          padding: 1rem 2rem;
+          align-items: center;
+          justyfi-content: end;
+        }
+        .containerHeader{
           display:flex;
           max-width: 1400px;
           padding: 1rem 2rem;
@@ -40,7 +62,7 @@ const Header = ({ segundaRota, segundoBotao, color }) => {
         img{
             max-width:30px;
             background:none;
-            vertical-align: text-top;
+            vertical-align: middle;
             
           }
         input{
@@ -56,7 +78,7 @@ const Header = ({ segundaRota, segundoBotao, color }) => {
         .containerBusca{
           padding:0;
           background:#ffffff10;
-          border:1px solid ${color};
+          border:1px solid #${color};
           padding:.3rem  1rem 0 .3rem;
           margin:1rem;
           border-radius:10px;
@@ -65,8 +87,13 @@ const Header = ({ segundaRota, segundoBotao, color }) => {
           .containerHeader{
             justify-content:center
           }
+          .containerH{
+            flex-wrap:wrap;
+            justify-content: space-around;
+          }
+
         }
-        @media(max-width:552px){
+        @media(max-width:620px){
           .containerHeader{
             flex-wrap:wrap;
             padding:0 ;

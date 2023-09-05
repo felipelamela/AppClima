@@ -1,7 +1,10 @@
 import React from 'react'
-import { format, getDay, getDate } from 'date-fns'
+import { format, getDay } from 'date-fns'
+import { DataComponentTypes } from '../../../types'
 
-const DataComponent = () => {
+
+
+const DataComponent: React.FC<DataComponentTypes> = ({ color }) => {
     const dias = {
         1: 'Segunda-feira',
         2: 'Terça-feira',
@@ -15,18 +18,20 @@ const DataComponent = () => {
     const DataFormatada = format(data, 'dd/MM/yyyy')
     const diaDaSemana = getDay(data)
 
-    console.log(DataFormatada)
-    console.log(diaDaSemana)
-
-
     return (
         <>
             <p>{dias[diaDaSemana]} - {DataFormatada}</p>
             <style jsx>{`
         p{
             padding: 10px 0 0 0;
-            color: #eeeeee
+            color: #${color}
         }
+        @media(max-width: 450px){
+            p{
+              flex-wrap: wrap;
+              text-align: center;
+              justify-content: center;
+            }
         
         `}</style>
         </>

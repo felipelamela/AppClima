@@ -8,19 +8,27 @@ interface TitleComponentType {
   tagPais: 'h1' | 'h2' | 'h3';
   cidade: string
   pais: string
+  color?: string
+  loading?: boolean
+  errorLoading?: boolean
 }
 
 
-const TitleComponent: React.FC<TitleComponentType> = ({ tagCidade, tagPais, cidade, pais }) => {
+const TitleComponent: React.FC<TitleComponentType> = ({ tagCidade, tagPais, cidade, pais, color, loading, errorLoading }) => {
   return (
-    <div className='containerLocal'>
-      <div>
-        <Title tag={tagCidade} text={cidade} color='eeeeee' />
-        <Title tag={tagPais} text={pais} color='eeeeee' />
-      </div>
-      <div>
-        <DataComponent />
-      </div>
+    <>
+      {!loading &&
+        <div className='containerLocal'>
+          <div>
+            <Title tag={tagCidade} text={cidade} color={color} />
+            <Title tag={tagPais} text={pais} color={color} />
+          </div>
+          <div>
+            <DataComponent color={color} />
+          </div>
+
+        </div>
+      }
       <style jsx>{`
         .containerLocal{
           display:inline;
@@ -30,8 +38,19 @@ const TitleComponent: React.FC<TitleComponentType> = ({ tagCidade, tagPais, cida
           display: flex;
           gap:8px;
         }     
+
+        @media(max-width: 530px){
+          .containerLocal{
+            display:flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+            padding: 1rem
+          }
+
+
       `}</style>
-    </div>
+    </>
   )
 }
 

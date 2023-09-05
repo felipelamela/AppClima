@@ -6,22 +6,28 @@ export interface InputTypes {
   typeFormat: string;
   placeholder?: string;
   color?: string;
+  pressDown?: Function;
+  classD?: string;
 }
 
 export interface ButtonTypes {
   name: string;
+  color?: string;
 }
 
 export interface TextAreaTypes {
   name: string;
   valor: string;
   setValor: Function;
+  color?: string;
+  placeholder?: string;
 }
 
 export interface InputFilesTypes {
   label: string;
   setValor: Function | null;
   tipoArquivo?: string | null;
+  color?: string;
 }
 
 export interface ParagraphTypes {
@@ -49,9 +55,12 @@ export interface ListaDeLocaisTypes {
   color?: string;
 }
 
-
 export interface ButtonContatoType {
-  rota: string
-  nome: string
-  color?:string
+  rota: string;
+  nome: string;
+  color?: string;
+}
+
+export interface DataComponentTypes {
+  color: string;
 }

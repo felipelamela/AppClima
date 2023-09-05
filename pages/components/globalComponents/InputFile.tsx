@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputFilesTypes } from '../../../types'
 
-const InputFile: React.FC<InputFilesTypes> = ({ label, tipoArquivo, setValor }) => {
+const InputFile: React.FC<InputFilesTypes> = ({ label, tipoArquivo, setValor, color }) => {
   const [estilo, setEstilo] = React.useState('desativo')
 
 
@@ -28,6 +28,9 @@ const InputFile: React.FC<InputFilesTypes> = ({ label, tipoArquivo, setValor }) 
         onChange={handleFile} />
       {estilo === 'ativo' ? <p>Apenas PDF são permitidos.</p> : ''}
       <style jsx>{`
+        label{
+          color:#${color};
+        }
         input{
           margin: .3rem 0 1rem 0;
           font-size: 1.2rem;
